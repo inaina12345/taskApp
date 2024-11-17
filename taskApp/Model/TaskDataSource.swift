@@ -25,7 +25,7 @@ class TaskDataSource: NSObject {
         let taskDictionaries = userDefaults.object(forKey: "tasks") as? [[String: Any]]
 
         guard let taskDictionaries else { return }
-
+        
         for dic in taskDictionaries {
             let task = Task(from: dic)
             tasks.append(task)

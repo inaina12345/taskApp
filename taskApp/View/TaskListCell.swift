@@ -16,6 +16,18 @@ import UIKit
 class TaskListCell: UITableViewCell {
     private var taskLabel: UILabel! // タスク内容を表示する Label
     private var deadlineLabel: UILabel! // deadlineを表示する Label
+
+    var task: Task? {
+        didSet {
+            guard let t = task else {
+                return
+            }
+            taskLabel.text = t.text
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            deadlineLabel.text = formatter.string(from: t.deadline)
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,13 +61,4 @@ class TaskListCell: UITableViewCell {
                                      height: 15.0)
     }
     
-    var task: Task? {
-        didSet {
-            guard let t = task else { return }
-            taskLabel.text = t.text
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd"
-            deadlineLabel.text = formatter.string(from: t.deadline)
-        }
-    }
 }
